@@ -15,8 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      - uses: actions/checkout@v4
+
+      # Recursively build each project
+      - name: Build all projects
+        run: |
+          find . -name "Cargo.toml" -execdir cargo build --verbose \;
+
+      # Recursively run tests for each project
+      - name: Run tests for all projects
+        run: |
+          find . -name "Cargo.toml" -execdir cargo test --verbose \;
