@@ -37,7 +37,7 @@ cargo run -- example_command_here
 
 # ㊜ Rust Collections Resouce
 
-[Rust Collections](https://github.com/ericgitangu/rust-hands-on/rust_collections.md)
+[Rust Collections](https://github.com/ericgitangu/rust-hands-on/rust_collections.md])
 
 ## 🔖 License
 
