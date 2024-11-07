@@ -4,6 +4,8 @@
 /// accessing elements, iterating over elements, and removing elements. It prints the results
 /// of these operations to the console.
 ///
+/// A `Vec` is a dynamically sized array, which provides efficient access to elements by index.
+///
 /// # Examples
 ///
 /// ```

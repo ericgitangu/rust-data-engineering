@@ -20,14 +20,14 @@ This repository serves as a guide to learn and practice Rust. The examples and t
 Each module and example is designed to be self-contained. To explore any example, clone the repository, navigate to the relevant directory, and use `cargo` to build and run the code:
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/rust-fundamentals.git
+    # Clone the repository
+    git clone https://github.com/yourusername/rust-fundamentals.git
 
-# Navigate to any example
-cd rust-fundamentals/math_utils
+    # Navigate to any example
+    cd rust-fundamentals/math_utils
 
-# Run the example
-cargo run -- example_command_here
+    # Run the example
+    cargo run -- example_command_here
 ```
 
 ## 📚 Prerequisites

@@ -33,14 +33,36 @@ fn main() {
     heap.push(3);
 
     // Peek at the largest element
-    println!("Top element is: {:?}", heap.peek());
+    println!("Top element in max-heap is: {:?}", heap.peek().unwrap());
 
     // Remove the largest element
-    println!("Popped element: {:?}", heap.pop());
+    println!("Popped element in max-heap: {:?}", heap.pop().unwrap());
 
     // Iterate over elements (Note: elements are not in sorted order)
     for element in heap.clone().into_sorted_vec() {
-        println!("Heap element: {}", element);
+        println!("Heap element in max-heap: {}", element);
+    }
+    // Create a min-heap by using a BinaryHeap with Reverse
+    let mut min_heap = BinaryHeap::new();
+    min_heap.push(std::cmp::Reverse(1));
+    min_heap.push(std::cmp::Reverse(5));
+    min_heap.push(std::cmp::Reverse(3));
+
+    // Peek at the smallest element
+    println!(
+        "Top element in min-heap is: {:?}",
+        min_heap.peek().map(|x| x.0).unwrap()
+    );
+
+    // Remove the smallest element
+    println!(
+        "Popped element from min-heap: {:?}",
+        min_heap.pop().map(|x| x.0).unwrap()
+    );
+
+    // Iterate over elements in the min-heap (Note: elements are not in sorted order)
+    for element in min_heap.clone().into_sorted_vec() {
+        println!("Min-heap element in min-heap: {}", element.0);
     }
 }
 
