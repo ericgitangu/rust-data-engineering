@@ -35,6 +35,10 @@ cargo run -- example_command_here
 - Rust: Ensure you have Rust installed. Visit rust-lang.org to get started.
 - Basic Programming Knowledge: Familiarity with programming concepts is beneficial but not required.
 
+# ㊜ Rust Collections Resouce
+
+[Rust Collections](https://github.com/ericgitangu/rust-hands-on/rust_collections.md)
+
 ## 🔖 License
 
 This repository is licensed under the MIT License. See the LICENSE file for more details.
