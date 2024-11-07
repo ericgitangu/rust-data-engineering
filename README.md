@@ -35,7 +35,7 @@ cargo run -- example_command_here
 - Rust: Ensure you have Rust installed. Visit rust-lang.org to get started.
 - Basic Programming Knowledge: Familiarity with programming concepts is beneficial but not required.
 
-# ㊜ Rust Collections Resouce
+## ㊜ Rust Collections Resouce
 
 - [Rust Collections](https://github.com/ericgitangu/rust-hands-on/blob/main/rust_collections.md)
 
