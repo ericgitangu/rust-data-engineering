@@ -5,6 +5,7 @@ use std::collections::HashSet;
 /// This function creates a new `HashSet`, inserts elements, checks for
 /// membership, iterates over the set, and removes an element.
 ///
+/// A `HashSet` is a collection that stores unique elements, and provides efficient
 /// # Examples
 ///
 /// ```

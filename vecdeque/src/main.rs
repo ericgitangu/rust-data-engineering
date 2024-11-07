@@ -2,6 +2,9 @@ use std::collections::VecDeque;
 
 /// This is the main function that demonstrates the usage of `VecDeque`.
 ///
+/// A `VecDeque` is a double-ended queue implemented using a `Vec`, providing efficient
+/// insertion and deletion of elements at both ends.
+///
 /// # Examples
 ///
 /// ```

@@ -4,6 +4,7 @@
 //! iterate over key-value pairs, and remove a key-value pair. It also includes tests to verify
 //! the functionality of these operations.
 //!
+//! A `HashMap` is a collection that stores key-value pairs, where each key is unique and associated
 //! # Examples
 //!
 //! ```

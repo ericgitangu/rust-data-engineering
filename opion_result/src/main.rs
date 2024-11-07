@@ -2,6 +2,14 @@
 /// values. It iterates over the vector and prints each value if it exists, or indicates
 /// when a `None` is found.
 ///
+/// The `Option` type is a powerful feature in Rust that represents a value that can either be
+/// `Some(T)` (containing a value of type `T`) or `None` (indicating the absence of a value).
+/// It is commonly used for safe handling of optional values, avoiding null pointer exceptions.
+///
+/// The `Result` type is another fundamental feature in Rust, used for error handling. It represents
+/// either a success (`Ok(T)`, containing a value of type `T`) or an error (`Err(E)`, containing an error
+/// value of type `E`). This allows for robust error handling and propagation.
+///
 /// # Examples
 ///
 /// ```

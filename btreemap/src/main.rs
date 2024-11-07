@@ -2,6 +2,8 @@ use std::collections::BTreeMap;
 
 /// Demonstrates basic usage of `BTreeMap` including insertion, iteration, and access.
 ///
+/// A `BTreeMap` is a map based on a balanced tree structure, which maintains
+///
 /// # Examples
 ///
 /// ```

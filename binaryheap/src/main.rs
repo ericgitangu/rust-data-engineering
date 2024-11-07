@@ -6,6 +6,12 @@ use std::collections::BinaryHeap;
 /// and performs various operations such as peeking, popping, and iterating
 /// over the elements.
 ///
+/// A `BTreeSet` is a set based on a balanced tree structure, which maintains
+/// its elements in sorted order. It provides efficient methods for insertion,
+/// deletion, and membership checking, with all operations having a time complexity
+/// of O(log n). Unlike a `BinaryHeap`, which is a priority queue, a `BTreeSet` is
+/// used when you need a collection of unique elements that are always sorted.
+///
 /// # Examples
 ///
 /// ```
