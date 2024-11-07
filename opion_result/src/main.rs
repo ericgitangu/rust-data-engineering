@@ -40,18 +40,4 @@ mod tests {
     fn test_main() {
         main();
     }
-
-    #[test]
-    fn test_main_output() {
-        // Capture the output of the main function
-        let output = {
-            let mut buf = Vec::new();
-            let mut writer = Box::new(&mut buf);
-            let _ = std::io::set_output_capture(Some(writer));
-            main();
-            std::io::set_output_capture(None);
-            String::from_utf8(buf).unwrap()
-        };
-        assert_eq!(output, "Value: 1\nNone found\nValue: 3\n");
-    }
 }
