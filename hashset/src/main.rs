@@ -10,7 +10,7 @@ use std::collections::HashSet;
 /// ```
 /// use std::collections::HashSet;
 ///
-/// let mut set = HashSet::new();
+/// let mut set: std::collections::HashSet<i32> = HashSet::new();
 /// set.insert(1);
 /// set.insert(2);
 /// set.insert(3);
@@ -26,7 +26,7 @@ use std::collections::HashSet;
 /// assert!(!set.contains(&1));
 /// ```
 fn main() {
-    let mut set = HashSet::new();
+    let mut set: std::collections::HashSet<i32> = HashSet::new();
     set.insert(1);
     set.insert(2);
     set.insert(3);
@@ -56,61 +56,61 @@ mod tests {
     }
     #[test]
     fn test_hashset_remove() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         set.remove(&1);
         assert_eq!(set.contains(&1), false);
     }
     #[test]
     fn test_hashset_contains() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         assert!(set.contains(&1));
     }
     #[test]
     fn test_hashset_iter() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         let mut iter = set.iter();
         assert_eq!(iter.next(), Some(&1));
     }
     #[test]
     fn test_hashset_len() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         assert_eq!(set.len(), 1);
     }
     #[test]
     fn test_hashset_is_empty() {
-        let mut set = HashSet::new();
+        let set: std::collections::HashSet<i32> = HashSet::new();
         assert!(set.is_empty());
     }
     #[test]
     fn test_hashset_clear() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         set.clear();
         assert!(set.is_empty());
     }
     #[test]
     fn test_hashset_insert() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         assert!(set.contains(&1));
     }
     #[test]
     fn test_hashset_insert_duplicate() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         set.insert(1);
         assert_eq!(set.len(), 1);
     }
     #[test]
     fn test_hashset_union() {
-        let mut set1 = HashSet::new();
+        let mut set1: std::collections::HashSet<i32> = HashSet::new();
         set1.insert(1);
         set1.insert(2);
-        let mut set2 = HashSet::new();
+        let mut set2: std::collections::HashSet<i32> = HashSet::new();
         set2.insert(2);
         set2.insert(3);
         let union = set1.union(&set2).collect::<Vec<_>>();
@@ -118,10 +118,10 @@ mod tests {
     }
     #[test]
     fn test_hashset_difference() {
-        let mut set1 = HashSet::new();
+        let mut set1: std::collections::HashSet<i32> = HashSet::new();
         set1.insert(1);
         set1.insert(2);
-        let mut set2 = HashSet::new();
+        let mut set2: std::collections::HashSet<i32> = HashSet::new();
         set2.insert(2);
         set2.insert(3);
         let difference = set1.difference(&set2).collect::<Vec<_>>();
@@ -129,10 +129,10 @@ mod tests {
     }
     #[test]
     fn test_hashset_intersection() {
-        let mut set1 = HashSet::new();
+        let mut set1: std::collections::HashSet<i32> = HashSet::new();
         set1.insert(1);
         set1.insert(2);
-        let mut set2 = HashSet::new();
+        let mut set2: std::collections::HashSet<i32> = HashSet::new();
         set2.insert(2);
         set2.insert(3);
         let intersection = set1.intersection(&set2).collect::<Vec<_>>();
@@ -140,10 +140,10 @@ mod tests {
     }
     #[test]
     fn test_hashset_symmetric_difference() {
-        let mut set1 = HashSet::new();
+        let mut set1: std::collections::HashSet<i32> = HashSet::new();
         set1.insert(1);
         set1.insert(2);
-        let mut set2 = HashSet::new();
+        let mut set2: std::collections::HashSet<i32> = HashSet::new();
         set2.insert(2);
         set2.insert(3);
         let symmetric_difference = set1.symmetric_difference(&set2).collect::<Vec<_>>();
@@ -151,7 +151,7 @@ mod tests {
     }
     #[test]
     fn test_hashset_retain() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         set.insert(2);
         set.retain(|x| x % 2 == 0);
@@ -159,45 +159,25 @@ mod tests {
     }
     #[test]
     fn test_hashset_eq() {
-        let mut set1 = HashSet::new();
+        let mut set1: std::collections::HashSet<i32> = HashSet::new();
         set1.insert(1);
-        let mut set2 = HashSet::new();
+        let mut set2: std::collections::HashSet<i32> = HashSet::new();
         set2.insert(1);
         assert_eq!(set1, set2);
     }
     #[test]
     fn test_hashset_ne() {
-        let mut set1 = HashSet::new();
+        let mut set1: std::collections::HashSet<i32> = HashSet::new();
         set1.insert(1);
-        let mut set2 = HashSet::new();
+        let mut set2: std::collections::HashSet<i32> = HashSet::new();
         set2.insert(2);
         assert_ne!(set1, set2);
     }
     #[test]
     fn test_hashset_clone() {
-        let mut set = HashSet::new();
+        let mut set: std::collections::HashSet<i32> = HashSet::new();
         set.insert(1);
         let cloned_set = set.clone();
         assert_eq!(set, cloned_set);
-    }
-    #[test]
-    fn test_hashset_hash() {
-        let mut set = HashSet::new();
-        set.insert(1);
-        assert_eq!(set.hash(), 1);
-    }
-    #[test]
-    fn test_hashset_hash_with_seed() {
-        let mut set = HashSet::new();
-        set.insert(1);
-        assert_eq!(set.hash_with_seed(0), 1);
-    }
-    #[test]
-    fn test_hashset_eq_with_seed() {
-        let mut set1 = HashSet::new();
-        set1.insert(1);
-        let mut set2 = HashSet::new();
-        set2.insert(1);
-        assert_eq!(set1, set2);
     }
 }

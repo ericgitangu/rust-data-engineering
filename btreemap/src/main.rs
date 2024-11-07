@@ -98,12 +98,4 @@ mod tests {
         let cloned_map = map.clone();
         assert_eq!(map, cloned_map);
     }
-    #[test]
-    fn test_btreemap_hash() {
-        let mut map = BTreeMap::new();
-        map.insert("c", 3);
-        map.insert("a", 1);
-        map.insert("b", 2);
-        assert_eq!(map.hash(), 1);
-    }
 }

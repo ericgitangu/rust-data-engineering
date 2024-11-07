@@ -8,6 +8,8 @@ use std::collections::HashMap;
 ///
 /// ```
 /// let n = 10;
+/// use std::collections::HashMap;
+/// use fibionacci_with_memo::fibonacci;
 /// let result = fibionacci_with_memo::fibonacci(n, &mut HashMap::new());
 /// assert_eq!(result, 55);
 /// ```

@@ -32,10 +32,10 @@
 use std::collections::HashMap;
 
 fn main() {
-    let mut map = HashMap::new();
-    map.insert("a", 1);
-    map.insert("b", 2);
-    map.insert("c", 3);
+    let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+    map.insert(String::from("a"), 1);
+    map.insert(String::from("b"), 2);
+    map.insert(String::from("c"), 3);
 
     // Access a value by key
     if let Some(value) = map.get("b") {
@@ -61,78 +61,77 @@ mod tests {
     }
     #[test]
     fn test_hashmap_remove() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.insert(String::from("a"), 1);
         map.remove("a");
         assert_eq!(map.get("a"), None);
     }
     #[test]
     fn test_hashmap_get() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.insert(String::from("a"), 1);
         assert_eq!(map.get("a"), Some(&1));
     }
     #[test]
     fn test_hashmap_iter() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
-        map.insert("b", 2);
-        map.insert("c", 3);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.insert(String::from("a"), 1);
         let mut iter = map.iter();
-        assert_eq!(iter.next(), Some((&"a", &1)));
+        assert_eq!(iter.next(), Some((&String::from("a"), &1)));
+        assert_eq!(iter.next(), None);
     }
     #[test]
     fn test_hashmap_insert() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.insert(String::from("a"), 1);
         assert_eq!(map.get("a"), Some(&1));
     }
     #[test]
     fn test_hashmap_contains_key() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
-        assert!(map.contains_key("a"));
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.insert(String::from("a"), 1);
+        assert!(map.contains_key(&String::from("a")));
     }
     #[test]
     fn test_hashmap_clear() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.insert(String::from("a"), 1);
         map.clear();
         assert!(map.is_empty());
     }
     #[test]
     fn test_hashmap_len() {
-        let mut map = HashMap::new();
-        map.insert("a", 1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.insert(String::from("a"), 1);
         assert_eq!(map.len(), 1);
     }
     #[test]
     fn test_hashmap_is_empty() {
-        let mut map = HashMap::new();
+        let map: std::collections::HashMap<String, i32> = HashMap::new();
         assert!(map.is_empty());
     }
     #[test]
     fn test_hashmap_entry() {
-        let mut map = HashMap::new();
-        map.entry("a").or_insert(1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.entry(String::from("a")).or_insert(1);
         assert_eq!(map.get("a"), Some(&1));
     }
     #[test]
     fn test_hashmap_entry_or_insert_with() {
-        let mut map = HashMap::new();
-        map.entry("a").or_insert_with(|| 1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.entry(String::from("a")).or_insert_with(|| 1);
         assert_eq!(map.get("a"), Some(&1));
     }
     #[test]
     fn test_hashmap_entry_or_insert() {
-        let mut map = HashMap::new();
-        map.entry("a").or_insert(1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.entry(String::from("a")).or_insert(1);
         assert_eq!(map.get("a"), Some(&1));
     }
     #[test]
     fn test_hashmap_entry_or_insert_with_closure() {
-        let mut map = HashMap::new();
-        map.entry("a").or_insert_with(|| 1);
+        let mut map: std::collections::HashMap<String, i32> = HashMap::new();
+        map.entry(String::from("a")).or_insert_with(|| 1);
         assert_eq!(map.get("a"), Some(&1));
     }
 }

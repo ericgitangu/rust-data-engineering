@@ -7,7 +7,7 @@
 /// # Examples
 ///
 /// ```
-/// let mut vec = Vec::new();
+/// let mut vec: Vec<i32> = Vec::new();
 /// vec.push(1);
 /// vec.push(2);
 /// vec.push(3);
@@ -25,7 +25,7 @@
 /// assert_eq!(vec, vec![1, 2]);
 /// ```
 fn main() {
-    let mut vec = Vec::new();
+    let mut vec: Vec<i32> = Vec::new();
     vec.push(1);
     vec.push(2);
     vec.push(3);
@@ -83,7 +83,7 @@ mod tests {
     }
     #[test]
     fn test_vector_is_empty() {
-        let vec = vec![];
+        let vec: Vec<i32> = vec![];
         assert_eq!(vec.is_empty(), true);
     }
     #[test]
