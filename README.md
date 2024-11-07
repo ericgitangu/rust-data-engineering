@@ -37,8 +37,8 @@ cargo run -- example_command_here
 
 # ㊜ Rust Collections Resouce
 
-[Rust Collections](https://github.com/ericgitangu/rust-hands-on/blob/main/rust_collections.md)
+- [Rust Collections](https://github.com/ericgitangu/rust-hands-on/blob/main/rust_collections.md)
 
 ## 🔖 License
 
-This repository is licensed under the MIT License. See the LICENSE file for more details.
+- This repository is licensed under the MIT License. See the LICENSE file for more details.
