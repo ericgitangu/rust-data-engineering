@@ -10,14 +10,25 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+  locate:
+    name: Locate Cargo.toml files
+    runs-on: ubuntu-latest
+    outputs:
+      dirs: ${{ steps.locate.outputs.dirs }}
+    steps:
+      - uses: actions/checkout@v4
 
+      - name: Locate Cargo.toml files
+        id: locate
+        run: |
+          echo "Locating Cargo.toml files..."
+          dirs=$(find "$GITHUB_WORKSPACE" -name "Cargo.toml" -exec dirname {} \; | sort -u | paste -sd "," -)
+          echo "dirs=$dirs" >> $GITHUB_ENV
+
+  lint:
+    name: Lint all projects
+    runs-on: ubuntu-latest
+    needs: locate
     steps:
       - uses: actions/checkout@v4
 
@@ -29,25 +40,9 @@ jobs:
           components: clippy
           override: true
 
-      - name: Install Dependencies
-        run: cargo fetch
-
-      - name: Locate Cargo.toml files
-        id: locate-cargo-files
+      - name: Lint projects
         run: |
-          echo "Locating Cargo.toml files..."
-          if [ "${{ runner.os }}" == "Windows" ]; then
-            $dirs = (Get-ChildItem -Path $env:GITHUB_WORKSPACE -Filter Cargo.toml -Recurse | Select-Object -ExpandProperty DirectoryName | Select-Object -Unique) -join ','
-            echo "dirs=$dirs" >> $env:GITHUB_OUTPUT
-          else
-            dirs=$(find "$GITHUB_WORKSPACE" -name "Cargo.toml" -exec dirname {} \; | sort -u | paste -sd "," -)
-            echo "dirs=$dirs" >> $GITHUB_OUTPUT
-          fi
-        shell: bash
-
-      - name: Lint all projects
-        run: |
-          IFS=',' read -ra DIRS <<< "${{ steps.locate-cargo-files.outputs.dirs }}"
+          IFS=',' read -ra DIRS <<< "${{ needs.locate.outputs.dirs }}"
           for dir in "${DIRS[@]}"; do
             echo "Linting $dir"
             cd "$dir"
@@ -55,9 +50,16 @@ jobs:
           done
         shell: bash
 
-      - name: Test all projects
+  test:
+    name: Test all projects
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test projects
         run: |
-          IFS=',' read -ra DIRS <<< "${{ steps.locate-cargo-files.outputs.dirs }}"
+          IFS=',' read -ra DIRS <<< "${{ needs.locate.outputs.dirs }}"
           for dir in "${DIRS[@]}"; do
             echo "Testing $dir"
             cd "$dir"
@@ -65,9 +67,16 @@ jobs:
           done
         shell: bash
 
-      - name: Build all projects
+  build:
+    name: Build all projects
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build projects
         run: |
-          IFS=',' read -ra DIRS <<< "${{ steps.locate-cargo-files.outputs.dirs }}"
+          IFS=',' read -ra DIRS <<< "${{ needs.locate.outputs.dirs }}"
           for dir in "${DIRS[@]}"; do
             echo "Building $dir"
             cd "$dir"
