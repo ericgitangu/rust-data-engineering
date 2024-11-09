@@ -1,4 +1,4 @@
-name: Rust
+name: Rust CI
 
 on:
   push:
@@ -11,18 +11,60 @@ env:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
 
-      # Recursively build each project
-      - name: Build all projects
-        run: |
-          find . -name "Cargo.toml" -execdir cargo build --verbose \;
+      - name: Set up Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: clippy
+          override: true
 
-      # Recursively run tests for each project
-      - name: Run tests for all projects
+      # Lint, Test, and Build all projects
+      - name: Lint, Test, and Build all projects
         run: |
-          find . -name "Cargo.toml" -execdir cargo test --verbose \;
+          echo "Locating Cargo.toml files..."
+          if [ "${{ runner.os }}" == "Windows" ]; then
+            for /f "usebackq delims=" %%f in (`where /r . Cargo.toml`) do (
+              set project_dir=%%~dpf
+              echo "Processing %project_dir%"
+              cd "%project_dir%"
+
+              echo "Running clippy..."
+              cargo clippy --all-targets -- -D warnings
+
+              echo "Running tests..."
+              cargo test --verbose
+
+              echo "Building..."
+              cargo build --verbose --release
+
+              cd "%GITHUB_WORKSPACE%"
+            )
+          else
+            find . -name "Cargo.toml" -print0 | while IFS= read -r -d '' file; do
+              project_dir=$(dirname "$file")
+              echo "Processing $project_dir"
+              cd "$project_dir"
+
+              echo "Running clippy..."
+              cargo clippy --all-targets -- -D warnings
+
+              echo "Running tests..."
+              cargo test --verbose
+
+              echo "Building..."
+              cargo build --verbose --release
+
+              cd "$GITHUB_WORKSPACE"
+            done
+          fi
+        shell: bash
