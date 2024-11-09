@@ -24,47 +24,53 @@ jobs:
       - name: Set up Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
+          profile: minimal
           toolchain: stable
           components: clippy
           override: true
 
-      # Lint, Test, and Build all projects
-      - name: Lint, Test, and Build all projects
+      - name: Install Dependencies
+        run: cargo fetch
+
+      - name: Locate Cargo.toml files
+        id: locate-cargo-files
         run: |
           echo "Locating Cargo.toml files..."
           if [ "${{ runner.os }}" == "Windows" ]; then
-            for /f "usebackq delims=" %%f in (`where /r . Cargo.toml`) do (
-              set project_dir=%%~dpf
-              echo "Processing %project_dir%"
-              cd "%project_dir%"
-
-              echo "Running clippy..."
-              cargo clippy --all-targets -- -D warnings
-
-              echo "Running tests..."
-              cargo test --verbose
-
-              echo "Building..."
-              cargo build --verbose --release
-
-              cd "%GITHUB_WORKSPACE%"
-            )
+            $dirs = (Get-ChildItem -Path $env:GITHUB_WORKSPACE -Filter Cargo.toml -Recurse | Select-Object -ExpandProperty DirectoryName | Select-Object -Unique) -join ','
+            echo "dirs=$dirs" >> $env:GITHUB_OUTPUT
           else
-            find . -name "Cargo.toml" -print0 | while IFS= read -r -d '' file; do
-              project_dir=$(dirname "$file")
-              echo "Processing $project_dir"
-              cd "$project_dir"
-
-              echo "Running clippy..."
-              cargo clippy --all-targets -- -D warnings
-
-              echo "Running tests..."
-              cargo test --verbose
-
-              echo "Building..."
-              cargo build --verbose --release
-
-              cd "$GITHUB_WORKSPACE"
-            done
+            dirs=$(find "$GITHUB_WORKSPACE" -name "Cargo.toml" -exec dirname {} \; | sort -u | paste -sd "," -)
+            echo "dirs=$dirs" >> $GITHUB_OUTPUT
           fi
+        shell: bash
+
+      - name: Lint all projects
+        run: |
+          IFS=',' read -ra DIRS <<< "${{ steps.locate-cargo-files.outputs.dirs }}"
+          for dir in "${DIRS[@]}"; do
+            echo "Linting $dir"
+            cd "$dir"
+            cargo clippy --all-targets -- -D warnings
+          done
+        shell: bash
+
+      - name: Test all projects
+        run: |
+          IFS=',' read -ra DIRS <<< "${{ steps.locate-cargo-files.outputs.dirs }}"
+          for dir in "${DIRS[@]}"; do
+            echo "Testing $dir"
+            cd "$dir"
+            cargo test --verbose
+          done
+        shell: bash
+
+      - name: Build all projects
+        run: |
+          IFS=',' read -ra DIRS <<< "${{ steps.locate-cargo-files.outputs.dirs }}"
+          for dir in "${DIRS[@]}"; do
+            echo "Building $dir"
+            cd "$dir"
+            cargo build --verbose --release
+          done
         shell: bash
