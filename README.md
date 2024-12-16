@@ -2,6 +2,7 @@
 
 [![Rust](https://github.com/ericgitangu/rust-hands-on/actions/workflows/rust.yml/badge.svg)](https://github.com/ericgitangu/rust-hands-on/actions/workflows/rust.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 Welcome to the **Rust Fundamentals** repository! This project is designed as a comprehensive learning resource for Rust, spanning from basic concepts to advanced techniques. It contains exercises, utilities, libraries, and CLI tools that cover essential Rust topics for developers who want to deepen their understanding of the language.
 
