@@ -1,0 +1,13 @@
+{
+    "name": "Rust Development Container",
+    "image": "mcr.microsoft.com/devcontainers/rust:latest",
+    "extensions": [
+        "rust-lang.rust",
+        "matklad.rust-analyzer"
+    ],
+    "settings": {
+        "rust-analyzer.cargo-watch.enable": true,
+        "rust-analyzer.procMacro.enable": true
+    },
+    "postCreateCommand": "cargo install cargo-edit && cargo install cargo-watch"
+}
